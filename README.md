@@ -14,8 +14,6 @@ Para esta tarea utilizaremos el sitio [https://saucedemo.com](https://www.sauced
 ## Estructura del proyecto:
 ```text
 pre-entrerga-automation-testing-Mariano-Andolfatto/
-├── .vscode/
-│   └── settings.json
 ├── reports/
 │   └── *_reporte.html
 ├── tests/
