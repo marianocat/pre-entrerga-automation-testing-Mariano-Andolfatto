@@ -11,6 +11,22 @@ Para esta tarea utilizaremos el sitio [https://saucedemo.com](https://www.sauced
 - Git
 - GitHub
 
+## Estructura del proyecto:
+```text
+pre-entrerga-automation-testing-Mariano-Andolfatto/
+├── .vscode/
+│   └── settings.json
+├── reports/
+│   └── *_reporte.html
+├── tests/
+│   └── test_saucedemo.py
+├── utils/
+│   └── utiles.py
+├── conftest.py
+├── pytest.ini
+└── requirements.txt
+```
+
 ## SetUp e Instalacion de dependencias
 Antes de empezar es altamente recomendable aislar el proyecto de otros usando un entorno especifico.
 
@@ -37,7 +53,10 @@ pytest
 Si se quieren correr partes especificas de las pruebas, se puede optar por alguno de los siguientes comandos:
 
 ```ps
-pytest opt1
-pytest opt2
-pytest opt3
+pytest # Para ejecutar todas las pruebas
+pytest -m login #Para pruebas relacionadas con el login
+pytest -m pagproductos #Para pruebas del armado de la pagina de productos
+pytest -m carrito #Para pruebas relacionadas con el carrito de compras
 ```
+
+Losa rechivos de resultados apareceran en la arpeta ./reports con la fecha y hora de cada ejecucion.

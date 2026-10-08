@@ -46,6 +46,7 @@ def test_login_fallido(driver):
     assert msj_error_text == "Epic sadface: Username and password do not match any user in this service", f"Mensaje incorrecto: {msj_error_text}"
     assert driver.current_url == utiles.URI_LOGIN
 
+@pytest.mark.pagproductos
 def test_ctrlProductos(driver):
     """
     Verificamos la presencia de elementos clave (productos, menu)
@@ -80,3 +81,33 @@ def test_ctrlProductos(driver):
     assert cmbOrdenar.is_displayed(), "El combo de ordenar no está presente en la página de inventario."
     assert contacto.is_displayed(), "El contacto no está presente en la página de inventario."
 
+@pytest.mark.carrito
+def test_carrito(driver):
+    """
+    Verificamos que el carrito de compras funcione correctamente.
+    """
+    utiles.try_login(driver, "standard_user", "secret_sauce")
+    utiles.reset_status(driver)
+
+    # Agregar un producto al carrito
+    btnAgregar = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.ID, "add-to-cart-sauce-labs-backpack"))
+    )
+    btnAgregar.click()
+
+    carritoCantProd = WebDriverWait(driver, 10).until(
+        EC.visibility_of_element_located((By.CSS_SELECTOR, "[data-test='shopping-cart-badge']"))
+    ).text
+
+    assert carritoCantProd == "1", f"La cantidad de productos en el carrito es incorrecta: {carritoCantProd}"
+
+    btnCarrito = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, "[data-test='shopping-cart-link']"))
+    )
+    btnCarrito.click()
+
+    labelsProductos = WebDriverWait(driver, 10).until(
+        EC.visibility_of_all_elements_located((By.CLASS_NAME, "inventory_item_name"))
+    )
+
+    assert "Sauce Labs Backpack" in [label.text for label in labelsProductos], "El producto agregado no se encuentra en el carrito."

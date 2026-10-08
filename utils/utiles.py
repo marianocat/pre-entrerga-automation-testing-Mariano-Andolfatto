@@ -45,3 +45,19 @@ def try_login(driver, usuario, password):
 
     # Hacer login
     boton_login.click()
+
+def reset_status(driver):
+    """
+    Función para resetear el estado de la aplicación.
+    """
+    # Localizar y hacer clic en el menú
+    menu_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.ID, "react-burger-menu-btn"))
+    )
+    menu_button.click()
+
+    # Localizar y hacer clic en el botón de reset
+    reset_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.ID, "reset_sidebar_link"))
+    )
+    reset_button.click()
