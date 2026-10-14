@@ -8,18 +8,7 @@ import time
 import pytest
 import utils.utiles as utiles
 
-
-@pytest.fixture
-def driver():
-    """
-    Fixture para obtener una instancia del navegador Firefox y cerrarlo después de la prueba.
-    Con esto no necesito cerrar el navegador en cada test, ya que se hace automáticamente al finalizar la prueba.
-    """
-    navegador = utiles.get_driver()
-    try:
-        yield navegador
-    finally:
-        navegador.quit()
+_URI_LOGIN = "https://www.saucedemo.com/"
 
 @pytest.mark.login
 def test_login_exitoso(driver):

@@ -7,22 +7,6 @@ from selenium.webdriver.support import expected_conditions as EC
 URI_LOGIN = "https://www.saucedemo.com/"
 URI_INVENTORY = "https://www.saucedemo.com/inventory.html"
 
-def get_driver():
-    """
-    Función para obtener una instancia del navegador Firefox.
-    """
-    try:
-        options = Options()
-        options.add_argument("--headless")
-        driver = webdriver.Firefox(options=options) #no displayar interfaz grafica
-        driver.implicitly_wait(10)  # Espera implícita de 10 segundos
-        driver.get(URI_LOGIN)
-        return driver
-    except Exception:
-        if driver is not None:
-            driver.quit()
-        raise
-    
 
 def try_login(driver, usuario, password):
     """
